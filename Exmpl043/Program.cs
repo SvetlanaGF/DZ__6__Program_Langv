@@ -5,36 +5,39 @@
 // k1 = 5, b1 = 2, k2 = 9, b2 = 4 -> (-0,5; -0,5)
 
 Console.Clear();
-double [,] lines = { {5, 2}, { 9, 4}};
+double[,] array = new double [2, 2];
 double x1;
 double y1;
 
-if ((lines[0,0] == lines[1,0]) && (lines[0,1] == lines[1,1])) 
+void InputCoefficients (double arr)
 {
-    Console.WriteLine("Прямые совпадают");
+for (int i = 0; i < array.GetLength(0); i++)
+{
+    for (int j = 0; j < array.GetLength(0);j++)
+    {
+        if (i == 0 && j == 0) Console.Write("k1: ");
+        else if (i == 0 && j == 1) Console.Write("b1: ");
+            else if (i == 1 && j == 0) Console.Write("k2: ");
+                else Console.Write("b2: ");
+        array [i,j] = int.Parse(Console.ReadLine());
+    }
 }
-else if (lines[0,0] == lines[1,0]) Console.WriteLine("Прямые параллельны");
-else
+}
+
+void OutputCoefficients (double arr)
 {
+Console.WriteLine("Решим систему уравнений:");
+Console.WriteLine("y = " + array[0,0] + " * x + " + array[0,1]);
+Console.WriteLine("y = " + array[1,0] + " * x + " + array[1,1]);
+}
+InputCoefficients (array [0,0]);
+Console.WriteLine();
+OutputCoefficients (array [0,0]);
+Console.WriteLine();
+
     //x=(b2-b1)/(k1-k2)
-    x1=(lines[1,1] - lines[0,1])/(lines[0,0] - lines[1,0]);
+    x1 = (array[1, 1] - array[0, 1]) / (array[0, 0] - array[1, 0]);
     //y=(k1*(b2-b1))/(k1-k2)+b1
-    y1=(lines[0,0]*(lines[1,1] - lines[0,1]))/(lines[0,0] - lines[1,0])+lines[0,1];
-    Console.WriteLine($"x= {x1}, y= {y1}");
-}
-
-
-double b1 = 2, k1 = 5, b2 = 4, k2 = 9;
-double x, y;
-
-if ((k1 == k2) && (b1 == b2)) Console.WriteLine("Прямые совпадают");
-
-else if (k1==k2) Console.WriteLine("Прямые параллельны");
-
-else
-{
-x=(b2-b1)/(k1-k2);
-y=(k1*(b2-b1))/(k1-k2)+b1;
-Console.WriteLine($"x= {x}, y= {y}");
-}
+    y1 = (array[0, 0] * (array[1, 1] - array[0, 1])) / (array[0, 0] - array[1, 0]) + array[0, 1];
+    Console.WriteLine($"Координты точки пересечения прямых: x= {x1}, y= {y1}\n");
 
